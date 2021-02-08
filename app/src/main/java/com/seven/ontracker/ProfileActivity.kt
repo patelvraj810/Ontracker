@@ -6,16 +6,30 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 
-class MainActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
+    private val authDb = FirebaseAuth.getInstance()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_profile)
 
 
+        // populate the textviews based on the current user's profile
+        if (authDb.currentUser != null) {
+            profileFullName.text = authDb.currentUser!!.displayName
+            profileEmail.text = authDb.currentUser!!.email
+        } else {
+            FirebaseAuth.getInstance().signOut()
+            finish()
+
+            val intent = Intent(applicationContext, SignInActivity::class.java)
+            startActivity(intent)
+        }
         setSupportActionBar(topToolbar)
 
     }
@@ -33,18 +47,18 @@ class MainActivity : AppCompatActivity() {
                 return true
             }*/
 
-           /* R.id.action_list -> {
-                startActivity(Intent(applicationContext, Recycle_Activity::class.java))
+            /* R.id.action_list -> {
+                 startActivity(Intent(applicationContext, Recycle_Activity::class.java))
 
-                return true
-            }*/
+                 return true
+             }*/
             R.id.action_profile -> {
-                startActivity(Intent(applicationContext, ProfileActivity::class.java))
+                //already in this activity
 
 
             }
             R.id.action_home -> {
-                //already at home
+                startActivity(Intent(applicationContext, MainActivity::class.java))
             }
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
@@ -57,5 +71,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
