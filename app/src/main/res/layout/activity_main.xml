@@ -5,11 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/navtoolbar"/>
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navtoolbar"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/addCategoryBtn"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/logo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_toStartOf="@+id/addItemBtn"
+        android:layout_toLeftOf="@+id/addItemBtn"
+        android:text="Add Category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addItemBtn" />
+
+    <Button
+        android:id="@+id/addItemBtn"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Add Item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <Button
+        android:id="@+id/viewCategoryBtn"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/addCategoryBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="60dp"
+        android:text="View Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewItemBtn" />
+
+    <Button
+        android:id="@+id/viewItemBtn"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/addItemBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_toEndOf="@+id/viewCategoryBtn"
+        android:layout_toRightOf="@+id/viewCategoryBtn"
+        android:text="View Item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <Button
+        android:id="@+id/aboutUsBtn"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/viewCategoryBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="108dp"
+        android:text="About Us"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_bias="0.988" />
 </androidx.constraintlayout.widget.ConstraintLayout>
