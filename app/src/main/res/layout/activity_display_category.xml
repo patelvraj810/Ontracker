@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DisplayCategoryActivity">
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navtoolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/categoriesRecyclearView"
-        android:scrollbars="vertical"
+        android:layout_width="410dp"
+        android:layout_height="645dp"
         android:scrollbarSize="6dp"
-        android:layout_marginTop = "10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navtoolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
