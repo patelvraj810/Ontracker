@@ -14,30 +14,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         addCategoryBtn.setOnClickListener {
             val intent = Intent (this, AddCategoryActivity::class.java)
             startActivity(intent)
         }
 
-        /*addItemBtn.setOnClickListener {
-            val intent = Intent (this, AddItem::class.java)
-            startActivity(intent)
-        }
-
         viewCategoryBtn.setOnClickListener {
-            val intent = Intent (this, ViewCategory::class.java)
+            val intent = Intent (this, DisplayCategoryActivity::class.java)
             startActivity(intent)
         }
 
-        viewItemBtn.setOnClickListener {
-            val intent = Intent (this, ViewItem::class.java)
+        aboutUsBtn.setOnClickListener {
+            val intent = Intent (this, AboutUsActivity::class.java)
             startActivity(intent)
-        }*/
-
-        /*aboutUsBtn.setOnClickListener {
-            val intent = Intent (this, aboutUsBtn::class.java)
-            startActivity(intent)
-        }*/
+        }
 
         setSupportActionBar(topToolbar)
 

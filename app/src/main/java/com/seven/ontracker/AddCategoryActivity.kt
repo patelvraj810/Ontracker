@@ -18,22 +18,25 @@ class AddCategoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_category)
 
         saveBtn.setOnClickListener{
-            if ((!TextUtils.isEmpty(editTextName.text))) {
+            if ((!TextUtils.isEmpty(categoryNameEditText.text))) {
                 // capture inputs into an instance of our Restaurant class
-                val addCategory = category()
-                addCategory.itemName = editTextName.text.toString().trim()
+                val category = Category()
+                category.categoryName = categoryNameEditText.text.toString().trim()
 
                 // connect & save to Firebase. collection will be created if it doesn't exist already
-                val db = FirebaseFirestore.getInstance().collection("addCategory")
-                addCategory.id = db.document().id
-                db.document(addCategory.id!!).set(addCategory)
+                val db = FirebaseFirestore.getInstance().collection("categories")
+                category.id = db.document().id
+                db.document(category.id!!).set(category)
 
                 // show confirmation & clear inputs
-                editTextName.setText("")
+                categoryNameEditText.setText("")
                 Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
+
+                val intent = Intent(applicationContext, DisplayCategoryActivity::class.java)
+                startActivity(intent)
             }
             else {
-                Toast.makeText(this, "Incomplete", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Try Again", Toast.LENGTH_LONG).show()
             }
         }
         setSupportActionBar(topToolbar)
