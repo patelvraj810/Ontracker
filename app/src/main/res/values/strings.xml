@@ -7,4 +7,7 @@
     <string name="logout">logout</string>
     <string name="location">Item location</string>
     <string name="Description">Item Description</string>
+    <string name="facebook_application_id" translatable="false">3005369646362240</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb3005369646362240</string>
+
 </resources>
