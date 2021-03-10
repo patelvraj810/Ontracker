@@ -42,16 +42,16 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // navigate menu items on click
         when (item.itemId) {
-            /*R.id.action_add -> {
-                startActivity(Intent(applicationContext, Add_Activity::class.java))
+            R.id.action_add -> {
+                startActivity(Intent(applicationContext, AddItemActivity::class.java))
                 return true
-            }*/
+            }
 
-            /* R.id.action_list -> {
-                 startActivity(Intent(applicationContext, Recycle_Activity::class.java))
+             R.id.action_list -> {
+                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
 
                  return true
-             }*/
+             }
             R.id.action_profile -> {
                 //already in this activity
 

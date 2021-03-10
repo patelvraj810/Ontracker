@@ -15,6 +15,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        addItemBtn.setOnClickListener {
+            val intent = Intent(this, AddItemActivity::class.java)
+            startActivity(intent)
+        }
+
+        viewItemBtn.setOnClickListener {
+            val intent = Intent(this, DisplayItemActivity::class.java)
+            startActivity(intent)
+        }
+
         addCategoryBtn.setOnClickListener {
             val intent = Intent (this, AddCategoryActivity::class.java)
             startActivity(intent)
@@ -42,16 +52,16 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // navigate menu items on click
         when (item.itemId) {
-            /*R.id.action_add -> {
-                startActivity(Intent(applicationContext, Add_Activity::class.java))
+            R.id.action_add -> {
+                startActivity(Intent(applicationContext, AddItemActivity::class.java))
                 return true
-            }*/
+            }
 
-           /* R.id.action_list -> {
-                startActivity(Intent(applicationContext, Recycle_Activity::class.java))
+            R.id.action_list -> {
+                startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
 
                 return true
-            }*/
+            }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
 

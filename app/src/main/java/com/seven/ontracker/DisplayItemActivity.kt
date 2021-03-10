@@ -14,31 +14,33 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_display_category.*
+import kotlinx.android.synthetic.main.activity_display_category.categoriesRecyclearView
+import kotlinx.android.synthetic.main.activity_display_item.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.android.synthetic.main.view_category.view.*
+import kotlinx.android.synthetic.main.view_item.view.*
 
-class DisplayCategoryActivity : AppCompatActivity() {
+class DisplayItemActivity : AppCompatActivity() {
     // Firestore connection
     val database = FirebaseFirestore.getInstance()
-    private var adapter: CategoryAdapter? = null
+    private var adapter: ItemAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_display_category)
+        setContentView(R.layout.activity_display_item)
 
 
         // Enforce our recycler view to use linear layout
-        categoriesRecyclearView.layoutManager = LinearLayoutManager(this)
+        itemsRecyclearView.layoutManager = LinearLayoutManager(this)
 
         // create the query and sort the results by user name
-        val query = database.collection("categories").orderBy("categoryName", Query.Direction.ASCENDING)
+        val query = database.collection("items").orderBy("itemName", Query.Direction.ASCENDING)
 
         // QAForumAdapter will grab the results and then display them in recycler view
-        val options = FirestoreRecyclerOptions.Builder<Category>().setQuery(query, Category::class.java).build()
-        adapter = CategoryAdapter(options)
-        categoriesRecyclearView.adapter = adapter
+        val options = FirestoreRecyclerOptions.Builder<Item>().setQuery(query, Item::class.java).build()
+        adapter = ItemAdapter(options)
+        itemsRecyclearView.adapter = adapter
 
-        categoriesRecyclearView.setVerticalScrollBarEnabled(true);
+        itemsRecyclearView.setVerticalScrollBarEnabled(true);
 
         setSupportActionBar(topToolbar)
 
@@ -57,10 +59,10 @@ class DisplayCategoryActivity : AppCompatActivity() {
                 return true
             }
 
-             R.id.action_list -> {
-                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
-                 return true
-             }
+            R.id.action_list -> {
+                //already in this activity
+
+            }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
                 return true
@@ -101,21 +103,25 @@ class DisplayCategoryActivity : AppCompatActivity() {
         }
     }
 
-    private inner class CategoryViewHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view) {
+    private inner class ItemViewHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view) {
 
     }
 
-    private inner class CategoryAdapter internal constructor(options: FirestoreRecyclerOptions<Category>) :
-        FirestoreRecyclerAdapter<Category, CategoryViewHolder>(options) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+    private inner class ItemAdapter internal constructor(options: FirestoreRecyclerOptions<Item>) :
+        FirestoreRecyclerAdapter<Item, ItemViewHolder>(options) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             // call the item_question view and render the recycler view
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_category, parent, false)
-            return CategoryViewHolder(view)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.view_item, parent, false)
+            return ItemViewHolder(view)
         }
 
         // Saving username and question into the recycler view from our QAForum model for each occurence
-        override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, model: Category) {
-            holder.itemView.categoryNameTextView.text = model.categoryName
+        override fun onBindViewHolder(holder: ItemViewHolder, position: Int, model: Item) {
+            holder.itemView.itemNameTextView.text = model.itemName
+            holder.itemView.itemLocationTextView.text = model.itemLocation
+            holder.itemView.itemDescriptionTextView.text = model.itemDescription
+
+
         }
     }
 }
