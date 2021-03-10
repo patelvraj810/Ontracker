@@ -5,4 +5,6 @@
     <string name="list_category">list_category</string>
     <string name="profile">profile</string>
     <string name="logout">logout</string>
+    <string name="location">Item location</string>
+    <string name="Description">Item Description</string>
 </resources>

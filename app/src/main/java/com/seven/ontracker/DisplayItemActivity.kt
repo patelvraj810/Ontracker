@@ -115,13 +115,24 @@ class DisplayItemActivity : AppCompatActivity() {
             return ItemViewHolder(view)
         }
 
-        // Saving username and question into the recycler view from our QAForum model for each occurence
+        // passing itemName,itemLocation and itemDescription into the recycler view from our form model for each occurence
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int, model: Item) {
             holder.itemView.itemNameTextView.text = model.itemName
             holder.itemView.itemLocationTextView.text = model.itemLocation
             holder.itemView.itemDescriptionTextView.text = model.itemDescription
 
+            // Item selection when RecyclerView item touched
+            holder.itemView.setOnClickListener {
+                val intent = Intent(applicationContext, DetailsItemActivity::class.java)
+                intent.putExtra("id", model.id)
+                intent.putExtra("itemName", model.itemName)
+                intent.putExtra("itemLocation", model.itemLocation)
+                intent.putExtra("itemDescription", model.itemDescription)
+                intent.putExtra("itemImage", model.itemImage)
 
+
+                startActivity(intent)
+            }
         }
     }
 }

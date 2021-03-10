@@ -58,14 +58,14 @@ class AddCategoryActivity : AppCompatActivity(){
         // navigate menu items on click
         when (item.itemId) {
             R.id.action_add -> {
-                //add item
+                startActivity(Intent(applicationContext, AddItemActivity::class.java))
             }
 
-            /* R.id.action_list -> {
-                 startActivity(Intent(applicationContext, Recycle_Activity::class.java))
+             R.id.action_list -> {
+                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
 
                  return true
-             }*/
+             }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
                 return true

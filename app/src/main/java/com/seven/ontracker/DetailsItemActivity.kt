@@ -6,16 +6,25 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_details_item.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class AboutUsActivity : AppCompatActivity() {
+class DetailsItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_us)
+        setContentView(R.layout.activity_details_item)
 
+        // populate Heading textview item details
+
+        itemName.setText(intent.getStringExtra("itemName"))
+        itemLocation.setText(intent.getStringExtra("itemLocation"))
+        itemDescription.setText(intent.getStringExtra("itemDescription"))
+
+//shows top tool bar
         setSupportActionBar(topToolbar)
 
     }
+
     // 2 overrides to display menu & handle its actions
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the main menu to add the items to the toolbar
@@ -31,20 +40,17 @@ class AboutUsActivity : AppCompatActivity() {
             }
 
             R.id.action_list -> {
-                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
+                startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
 
-                 return true
-             }
+                return true
+            }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
-                return true
 
 
             }
             R.id.action_home -> {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
-                return true
-
             }
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
@@ -57,4 +63,6 @@ class AboutUsActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }

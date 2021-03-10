@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_item.*
+import kotlinx.android.synthetic.main.activity_details_item.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class AddItemActivity : AppCompatActivity() {
@@ -18,7 +19,8 @@ class AddItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_item)
 
         saveItemBtn.setOnClickListener{
-            if ((!TextUtils.isEmpty(itemNameEditText.text))) {
+            if ((!TextUtils.isEmpty(itemNameEditText.text)) && (!TextUtils.isEmpty(itemLocationEditText.text)) && (!TextUtils.isEmpty(itemDescriptionEditText.text))
+            ) {
                 // capture inputs into an instance of our item class
                 val item = Item()
                 item.itemName = itemNameEditText.text.toString().trim()
@@ -33,6 +35,9 @@ class AddItemActivity : AppCompatActivity() {
 
                 // show confirmation & clear inputs
                 itemNameEditText.setText("")
+                itemLocationEditText.setText("")
+                itemDescriptionEditText.setText("")
+
 
                 Toast.makeText(this, "Item Added", Toast.LENGTH_LONG).show()
 

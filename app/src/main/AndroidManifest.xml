@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".DisplayItemActivity"></activity>
+        <activity android:name=".DetailsItemActivity"></activity>
+        <activity android:name=".DisplayItemActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".DisplayCategoryActivity" />
