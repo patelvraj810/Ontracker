@@ -119,7 +119,6 @@ class DisplayItemActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int, model: Item) {
             holder.itemView.itemNameTextView.text = model.itemName
             holder.itemView.itemLocationTextView.text = model.itemLocation
-            holder.itemView.itemDescriptionTextView.text = model.itemDescription
 
             // Item selection when RecyclerView item touched
             holder.itemView.setOnClickListener {
