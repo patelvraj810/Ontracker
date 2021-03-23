@@ -1,5 +1,7 @@
 package com.seven.ontracker;
 
+import android.net.Uri
+
 public class Category {
     var id: String? = null
     var categoryName: String? = null

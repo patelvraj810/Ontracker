@@ -15,14 +15,12 @@ class DetailsItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details_item)
 
         // populate Heading textview item details
-
         itemName.setText(intent.getStringExtra("itemName"))
         itemLocation.setText(intent.getStringExtra("itemLocation"))
         itemDescription.setText(intent.getStringExtra("itemDescription"))
 
-//shows top tool bar
+        //shows top tool bar
         setSupportActionBar(topToolbar)
-
     }
 
     // 2 overrides to display menu & handle its actions
@@ -31,6 +29,7 @@ class DetailsItemActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.navbar_menu, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // navigate menu items on click
         when (item.itemId) {

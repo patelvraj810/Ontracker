@@ -1,9 +1,13 @@
 package com.seven.ontracker
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -13,6 +17,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import io.grpc.InternalChannelz.id
+import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_display_category.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.view_category.view.*
@@ -26,7 +32,6 @@ class DisplayCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_category)
 
-
         // Enforce our recycler view to use linear layout
         categoriesRecyclearView.layoutManager = LinearLayoutManager(this)
 
@@ -37,6 +42,7 @@ class DisplayCategoryActivity : AppCompatActivity() {
         val options = FirestoreRecyclerOptions.Builder<Category>().setQuery(query, Category::class.java).build()
         adapter = CategoryAdapter(options)
         categoriesRecyclearView.adapter = adapter
+
 
         categoriesRecyclearView.setVerticalScrollBarEnabled(true);
 
@@ -116,6 +122,15 @@ class DisplayCategoryActivity : AppCompatActivity() {
         // Saving username and question into the recycler view from our QAForum model for each occurence
         override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, model: Category) {
             holder.itemView.categoryNameTextView.text = model.categoryName
+            holder.itemView.updateItem.setOnClickListener {
+                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
+                intent.putExtra("categoryName", model.categoryName)
+                startActivity(intent)
+                database.collection("categories").document(model.id.toString()).delete()
+            }
+            holder.itemView.deleteItem.setOnClickListener {
+                database.collection("categories").document(model.id.toString()).delete()
+            }
         }
     }
 }

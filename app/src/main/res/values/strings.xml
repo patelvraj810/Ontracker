@@ -9,5 +9,8 @@
     <string name="Description">Item Description</string>
     <string name="facebook_application_id" translatable="false">3005369646362240</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb3005369646362240</string>
+    <string name="ask_question_title">Have a Quesiton?</string>
+    <string name="QAForum_header"><![CDATA[Q&A Forum]]></string>
+    <string name="display_questions_header">All Questions</string>
 
 </resources>

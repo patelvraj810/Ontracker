@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".DetailsItemActivity"></activity>
+        <activity android:name=".DisplayQuestionAnswerActivity"></activity>
+        <activity android:name=".QuestionAnswerActivity" />
+        <activity android:name=".DetailsItemActivity" />
         <activity android:name=".DisplayItemActivity" />
         <activity android:name=".AddItemActivity" />
         <activity android:name=".AboutUsActivity" />

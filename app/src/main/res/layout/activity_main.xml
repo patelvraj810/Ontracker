@@ -94,4 +94,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintVertical_bias="0.988" />
+
+    <Button
+        android:id="@+id/forumButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QA Forum"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="655dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

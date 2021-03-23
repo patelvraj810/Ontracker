@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        forumButton.setOnClickListener {
+            val intent = Intent (this, QuestionAnswerActivity::class.java)
+            startActivity(intent)
+        }
+
         setSupportActionBar(topToolbar)
 
     }

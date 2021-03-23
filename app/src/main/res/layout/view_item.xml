@@ -17,26 +17,7 @@
         android:textFontWeight="500"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/updateItem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/updateItem"
-        android:layout_width="84dp"
-        android:layout_height="35dp"
-        android:text="update"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteItem"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/deleteItem"
-        android:layout_width="84dp"
-        android:layout_height="35dp"
-        android:text="delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,9 +29,8 @@
         android:textFontWeight="500"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/updateItem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"/>
 
     <TextView
         android:id="@+id/itemDescriptionTextView"
@@ -61,8 +41,30 @@
         android:textFontWeight="500"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/updateItem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemLocationTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/itemLocationTextView"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/updateItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/itemLocationTextView"
+        app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/deleteItem"
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        app:tint="@color/white" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/updateItem"
+        app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_delete_24"
+        app:tint="@color/white" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

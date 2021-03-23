@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionAnswerActivity">
+
+    <TextView
+        android:id="@+id/QAForumHeadingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/theme_color"
+        android:text="@string/QAForum_header"
+        android:textColor="@color/white"
+        android:textSize="@dimen/heading"
+        android:textFontWeight="700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="@dimen/title_top_padding"
+        android:paddingLeft="@dimen/title_left_padding"/>
+
+    <TextView
+        android:id="@+id/askQuestionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:text="@string/ask_question_title"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textFontWeight="300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QAForumHeadingTextView"
+        android:paddingTop="@dimen/title_top_padding"
+        android:paddingLeft="@dimen/title_left_padding"/>
+
+    <EditText
+        android:id="@+id/questionPublisherName"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/askQuestionTitle"
+        android:ems="10"
+        android:hint="Enter the Name"
+        android:background="@drawable/border"
+        style="@style/Widget.AppCompat.EditText"/>
+
+    <EditText
+        android:id="@+id/questionEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionPublisherName"
+        android:ems="10"
+        android:maxLines="4"
+        android:lines="4"
+        android:gravity="start|top"
+        android:hint="Enter the Question"
+        android:background="@drawable/border"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/saveQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/save_button_top_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionEditText"
+        android:text="Save Question"
+        android:textColor="@color/black"
+        android:textFontWeight="500"
+        android:textSize="@dimen/save_button_size" />
+</androidx.constraintlayout.widget.ConstraintLayout>

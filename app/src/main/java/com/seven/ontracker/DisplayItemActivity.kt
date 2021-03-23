@@ -17,7 +17,10 @@ import kotlinx.android.synthetic.main.activity_display_category.*
 import kotlinx.android.synthetic.main.activity_display_category.categoriesRecyclearView
 import kotlinx.android.synthetic.main.activity_display_item.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.view_category.view.*
 import kotlinx.android.synthetic.main.view_item.view.*
+import kotlinx.android.synthetic.main.view_item.view.deleteItem
+import kotlinx.android.synthetic.main.view_item.view.updateItem
 
 class DisplayItemActivity : AppCompatActivity() {
     // Firestore connection
@@ -122,16 +125,23 @@ class DisplayItemActivity : AppCompatActivity() {
             holder.itemView.itemDescriptionTextView.text = model.itemDescription
 
             // Item selection when RecyclerView item touched
-            holder.itemView.setOnClickListener {
+            holder.itemView.itemNameTextView.setOnClickListener {
                 val intent = Intent(applicationContext, DetailsItemActivity::class.java)
                 intent.putExtra("id", model.id)
                 intent.putExtra("itemName", model.itemName)
                 intent.putExtra("itemLocation", model.itemLocation)
                 intent.putExtra("itemDescription", model.itemDescription)
                 intent.putExtra("itemImage", model.itemImage)
-
-
                 startActivity(intent)
+            }
+            holder.itemView.updateItem.setOnClickListener {
+                val intent = Intent(applicationContext, AddItemActivity::class.java)
+                intent.putExtra("categoryName", model.itemName)
+                startActivity(intent)
+                database.collection("items").document(model.id.toString()).delete()
+            }
+            holder.itemView.deleteItem.setOnClickListener {
+                database.collection("items").document(model.id.toString()).delete()
             }
         }
     }
