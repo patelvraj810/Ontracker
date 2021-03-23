@@ -27,26 +27,60 @@ import kotlin.collections.HashMap
 
 class AddCategoryActivity : AppCompatActivity(){
 
+    private val PICK_IMAGE_REQUEST = 71
+    private var filePath: Uri? = null
+    private var firebaseStore: FirebaseStorage? = null
+    private var storageReference: StorageReference? = null
+    val category = Category()
+    var downloadUri :Uri? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)
 
+        //the below code is for image selection
+        firebaseStore = FirebaseStorage.getInstance()
+        storageReference = FirebaseStorage.getInstance().reference
+
+        imageBtn.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+        }
+
         saveBtn.setOnClickListener{
+
+            //saving image
             //saving to name firestore
             if ((!TextUtils.isEmpty(categoryNameEditText.text))) {
-
-                val category = Category()
                 // capture inputs into an instance of our category class
-                category.categoryName = categoryNameEditText.text.toString().trim()
-                // connect & save to Firebase. collection will be created if it doesn't exist already
-                val db = FirebaseFirestore.getInstance().collection("categories")
-                category.id = db.document().id
-                db.document(category.id!!).set(category)
 
-                // show confirmation & clear inputs
-                categoryNameEditText.setText("")
-                Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
+                if(filePath != null){
+                    val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
+                    val uploadTask = ref?.putFile(filePath!!)
 
+                    val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        return@Continuation ref.downloadUrl
+                    })?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            downloadUri = task.result
+                        } else {
+                            // Handle failures
+                        }
+                    }?.addOnFailureListener{
+
+                    }
+                }else{
+                    Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
+                }
+
+                saveToDb(downloadUri.toString())
                 val intent = Intent(applicationContext, DisplayCategoryActivity::class.java)
                 startActivity(intent)
             }
@@ -55,11 +89,41 @@ class AddCategoryActivity : AppCompatActivity(){
             }
 
         }
-
-
         //the below line is for toolbar
         setSupportActionBar(topToolbar)
 
+    }
+
+    private fun saveToDb(uri: String){
+        category.categoryName = categoryNameEditText.text.toString().trim()
+        category.categoryImage = uri
+        // connect & save to Firebase. collection will be created if it doesn't exist already
+        val db = FirebaseFirestore.getInstance().collection("categories")
+        category.id = db.document().id
+        db.document(category.id!!).set(category)
+
+        // show confirmation & clear inputs
+        categoryNameEditText.setText("")
+        Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
+
+    }
+
+    //the below method is for selecting image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            if(data == null || data.data == null){
+                return
+            }
+
+            filePath = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                imageBtn.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     //the below two methods are for toolbar
@@ -103,5 +167,4 @@ class AddCategoryActivity : AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
