@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent (this, AboutUsActivity::class.java)
             startActivity(intent)
         }
+        logo.setOnClickListener {
+            val intent = Intent (this, DisplayItemActivity::class.java)
+            startActivity(intent)
+        }
 
         forumButton.setOnClickListener {
             val intent = Intent (this, QuestionAnswerActivity::class.java)

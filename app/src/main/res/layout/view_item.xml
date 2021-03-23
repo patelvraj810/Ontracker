@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/itemNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="top"
         android:paddingLeft="15dp"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/itemLocationTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:paddingLeft="15dp"
@@ -31,6 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemNameTextView"/>
+
 
     <TextView
         android:id="@+id/itemDescriptionTextView"
@@ -64,7 +65,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_delete_24"
         app:tint="@color/white" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
