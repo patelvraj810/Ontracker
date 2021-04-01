@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -13,8 +14,8 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="389dp"
+        android:layout_height="207dp"
         android:layout_alignParentTop="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,13 +29,14 @@
         android:layout_below="@+id/logo"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:layout_toStartOf="@+id/addItemBtn"
         android:layout_toLeftOf="@+id/addItemBtn"
         android:text="Add Category"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addItemBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/addItemBtn"
+        android:background="@color/icons"/>
 
     <Button
         android:id="@+id/addItemBtn"
@@ -42,11 +44,12 @@
         android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
         android:text="Add Item"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:background="@color/icons"/>
 
     <Button
         android:id="@+id/viewCategoryBtn"
@@ -56,10 +59,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="30dp"
         android:text="View Category"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewItemBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/viewItemBtn"
+        android:background="@color/icons"/>
 
     <Button
         android:id="@+id/viewItemBtn"
@@ -74,36 +78,66 @@
         android:layout_toRightOf="@+id/viewCategoryBtn"
         android:text="View Item"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:background="@color/icons"/>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/aboutUsBtn"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/viewCategoryBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="108dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:text="About Us"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintTop_toBottomOf="@+id/addCategoryBtn"
+        app:srcCompat="@drawable/ic_baseline_contact_mail_24"
+        app:tint="@color/icons"
+        />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/forumButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         android:text="QA Forum"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="655dp"
+        app:layout_constraintStart_toEndOf="@+id/privacybtn"
+        app:layout_constraintTop_toBottomOf="@+id/viewCategoryBtn"
+        app:srcCompat="@drawable/ic_baseline_contact_support_24"
+        app:tint="@color/icons" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/privacybtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="privacy"
+        app:layout_constraintStart_toEndOf="@+id/aboutUsBtn"
+        app:layout_constraintTop_toBottomOf="@+id/addCategoryBtn"
+        app:srcCompat="@drawable/ic_baseline_privacy_tip_24"
+        app:tint="@color/icons" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/termandcondBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:text="Terms And Condition"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toEndOf="@+id/forumButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewCategoryBtn"
+        app:srcCompat="@drawable/ic_baseline_content_paste_24"
+        app:tint="@color/icons" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,6 +48,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent (this, QuestionAnswerActivity::class.java)
             startActivity(intent)
         }
+        termandcondBtn.setOnClickListener {
+            val intent = Intent (this, TermsActivity::class.java)
+            startActivity(intent)
+        }
+
+        privacybtn.setOnClickListener {
+            val intent = Intent (this, PrivacyActivity::class.java)
+            startActivity(intent)
+        }
 
         setSupportActionBar(topToolbar)
 

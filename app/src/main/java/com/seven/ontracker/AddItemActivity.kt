@@ -72,11 +72,11 @@ class AddItemActivity : AppCompatActivity() {
                 //add item
             }
 
-             R.id.action_list -> {
-                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
+            R.id.action_list -> {
+                startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
 
-                 return true
-             }
+                return true
+            }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
                 return true
