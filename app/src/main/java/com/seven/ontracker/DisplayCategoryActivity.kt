@@ -1,10 +1,12 @@
 package com.seven.ontracker
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -20,8 +22,11 @@ import com.google.firebase.ktx.Firebase
 import io.grpc.InternalChannelz.id
 import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_display_category.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.view_category.view.*
+import java.io.File
+import java.io.FileInputStream
 
 class DisplayCategoryActivity : AppCompatActivity() {
     // Firestore connection
@@ -122,15 +127,38 @@ class DisplayCategoryActivity : AppCompatActivity() {
         // Saving username and question into the recycler view from our QAForum model for each occurence
         override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, model: Category) {
             holder.itemView.categoryNameTextView.text = model.categoryName
-            holder.itemView.updateItem.setOnClickListener {
-                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
-                intent.putExtra("categoryName", model.categoryName)
-                startActivity(intent)
-                database.collection("categories").document(model.id.toString()).delete()
-            }
+//            val encodeByte = Base64.decode(model.categoryImage, Base64.DEFAULT)
+//            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
+            // holder.itemView.categoryImageView.setImageURI(model.categoryImage)
+
+            val imageUri = Uri.parse(model.categoryImage)
+            var file: File = File(imageUri.path)
+            var bitmapImage = BitmapFactory.decodeStream(FileInputStream(file))
+
+            // display in Image View
+            holder.itemView.categoryImageView.setImageBitmap(bitmapImage)
+
+//            holder.itemView.updateItem.setOnClickListener {
+////                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
+////                intent.putExtra("categoryName", model.categoryName)
+////                startActivity(intent)
+////                database.collection("categories").document(model.id.toString()).delete()
+//                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
+//                intent.putExtra("ID", model.id)
+//                intent.putExtra("CATEGORY_NAME", model.categoryName)
+//                intent.putExtra("CATEGORY_IMAGE", model.categoryImage)
+//                intent.putExtra("isEditMode", true)//need to update exsiting data,set true
+//                startActivity(intent)
+//            }
             holder.itemView.deleteItem.setOnClickListener {
                 database.collection("categories").document(model.id.toString()).delete()
             }
         }
     }
+
+//    private fun EditCategory(id:String, categoryName:String, categoryImage:String) {
+//        //Edit is clicked
+//        //Start AddUpdateRecordActivity to Update existing record
+//
+//    }
 }

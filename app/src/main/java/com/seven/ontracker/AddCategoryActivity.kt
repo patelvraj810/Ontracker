@@ -1,7 +1,11 @@
-package com.seven.ontracker
+ package com.seven.ontracker
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,22 +36,45 @@ class AddCategoryActivity : AppCompatActivity(){
     private var firebaseStore: FirebaseStorage? = null
     private var storageReference: StorageReference? = null
     val category = Category()
-    var downloadUri :Uri? = null
+//    var downloadUri :Uri? = null
+    private var isEditMode = false
+
+    private var id: String? = null
+    private var categoryName: String? = null
+    private var categoryImage: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)
 
+      //  isEditMode = intent.getBooleanExtra("isEditMode", false);
+
         //the below code is for image selection
         firebaseStore = FirebaseStorage.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
 
-        imageBtn.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
-        }
+        imageBtn.setOnClickListener(object: View.OnClickListener {
+            override fun onClick(view:View) {
+                selectImage(this@AddCategoryActivity)
+            }
+        })
+
+        //the below is edit code
+//        if (isEditMode) {
+//            //update data
+//            id = intent.getStringExtra("ID");
+//            categoryName = intent.getStringExtra("CATEGORY_NAME");
+//            categoryImage = intent.getStringExtra("CATEGORY_IMAGE");
+//
+//            categoryNameEditText.setText(id)
+//        }
+
+//        imageBtn.setOnClickListener {
+//            val intent = Intent()
+//            intent.type = "image/*"
+//            intent.action = Intent.ACTION_GET_CONTENT
+//            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+//        }
 
         saveBtn.setOnClickListener{
 
@@ -57,6 +84,7 @@ class AddCategoryActivity : AppCompatActivity(){
                 // capture inputs into an instance of our category class
 
                 if(filePath != null){
+                    category.categoryName = categoryNameEditText.text.toString().trim()
                     val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
                     val uploadTask = ref?.putFile(filePath!!)
 
@@ -69,7 +97,18 @@ class AddCategoryActivity : AppCompatActivity(){
                         return@Continuation ref.downloadUrl
                     })?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            downloadUri = task.result
+                           val downloadUri = task.result
+                            category.categoryImage = downloadUri.toString()
+
+                            // connect & save to Firebase. collection will be created if it doesn't exist already
+                            val db = FirebaseFirestore.getInstance().collection("categories")
+                            category.id = db.document().id
+                            db.document(category.id!!).set(category)
+//
+                            categoryNameEditText.setText("")
+                            Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
+                            val intent = Intent(applicationContext, DisplayCategoryActivity::class.java)
+                            startActivity(intent)
                         } else {
                             // Handle failures
                         }
@@ -80,9 +119,15 @@ class AddCategoryActivity : AppCompatActivity(){
                     Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
                 }
 
-                saveToDb(downloadUri.toString())
-                val intent = Intent(applicationContext, DisplayCategoryActivity::class.java)
-                startActivity(intent)
+//                category.categoryName = categoryNameEditText.text.toString().trim()
+////             category.categoryImage = downloadUri.toString()
+//                // connect & save to Firebase. collection will be created if it doesn't exist already
+//                val db = FirebaseFirestore.getInstance().collection("categories")
+//                category.id = db.document().id
+//                db.document(category.id!!).set(category)
+
+                // show confirmation & clear inputs
+                
             }
             else {
                 Toast.makeText(this, "Try Again", Toast.LENGTH_LONG).show()
@@ -94,34 +139,93 @@ class AddCategoryActivity : AppCompatActivity(){
 
     }
 
-    private fun saveToDb(uri: String){
-        category.categoryName = categoryNameEditText.text.toString().trim()
-        category.categoryImage = uri
-        // connect & save to Firebase. collection will be created if it doesn't exist already
-        val db = FirebaseFirestore.getInstance().collection("categories")
-        category.id = db.document().id
-        db.document(category.id!!).set(category)
-
-        // show confirmation & clear inputs
-        categoryNameEditText.setText("")
-        Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
-
+    private fun selectImage(context: Context) {
+        val options = arrayOf<CharSequence>("Take Photo", "Choose from Gallery", "Cancel")
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Choose your profile picture")
+        builder.setItems(options, object: DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface, item:Int) {
+                if (options[item] == "Take Photo")
+                {
+                    val takePicture = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(takePicture, 0)
+                }
+                else if (options[item] == "Choose from Gallery")
+                {
+                    val pickPhoto = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(pickPhoto, 1)
+                }
+                else if (options[item] == "Cancel")
+                {
+                    dialog.dismiss()
+                }
+            }
+        })
+        builder.show()
     }
+
+
+//    private fun saveToDb(uri: String){
+//        category.categoryName = categoryNameEditText.text.toString().trim()
+//        category.categoryImage = uri
+//        // connect & save to Firebase. collection will be created if it doesn't exist already
+//        val db = FirebaseFirestore.getInstance().collection("categories")
+//        category.id = db.document().id
+//        db.document(category.id!!).set(category)
+//
+//        // show confirmation & clear inputs
+//        categoryNameEditText.setText("")
+//        Toast.makeText(this, "Category Added", Toast.LENGTH_LONG).show()
+//
+//    }
 
     //the below method is for selecting image
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+//            if(data == null || data.data == null){
+//                return
+//            }
+//
+//            filePath = data.data
+//            try {
+//                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+//                imageBtn.setImageBitmap(bitmap)
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-            if(data == null || data.data == null){
-                return
-            }
+        if (resultCode != RESULT_CANCELED) {
+            when (requestCode) {
+                0 -> if (resultCode == RESULT_OK && data != null) {
+                    filePath = data.data
+                    try {
+                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                        imageBtn.setImageBitmap(bitmap)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
 
-            filePath = data.data
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                imageBtn.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
+//                    filePath = data.data
+////                    val selectedImage = data.getExtras()?.get("data") as Bitmap
+////                    imageBtn.setImageBitmap(selectedImage)
+//                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+//                    imageBtn.setImageBitmap(bitmap)
+
+                1 -> if (resultCode == RESULT_OK && data != null) {
+
+                    //  val filePathColumn = arrayOf<String>(MediaStore.Images.Media.DATA)
+                    filePath = data.data
+                    try {
+                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                        imageBtn.setImageBitmap(bitmap)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+
+                }
             }
         }
     }
