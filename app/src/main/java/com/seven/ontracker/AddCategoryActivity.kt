@@ -57,7 +57,8 @@ class AddCategoryActivity : AppCompatActivity(){
                 // capture inputs into an instance of our category class
 
                 if(filePath != null){
-                    val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
+                    val categoryImageID = UUID.randomUUID().toString()
+                    val ref = storageReference?.child("uploads/$categoryImageID")
                     val uploadTask = ref?.putFile(filePath!!)
 
                     val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -69,7 +70,7 @@ class AddCategoryActivity : AppCompatActivity(){
                         return@Continuation ref.downloadUrl
                     })?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            downloadUri = task.result
+                            saveToDb(categoryImageID)
                         } else {
                             // Handle failures
                         }
@@ -80,7 +81,6 @@ class AddCategoryActivity : AppCompatActivity(){
                     Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
                 }
 
-                saveToDb(downloadUri.toString())
                 val intent = Intent(applicationContext, DisplayCategoryActivity::class.java)
                 startActivity(intent)
             }

@@ -3,9 +3,12 @@ package com.seven.ontracker
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.Menu
 import android.view.MenuItem
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_details_item.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -18,10 +21,15 @@ class DetailsItemActivity : AppCompatActivity() {
         itemName.setText(intent.getStringExtra("itemName"))
         itemLocation.setText(intent.getStringExtra("itemLocation"))
         itemDescription.setText(intent.getStringExtra("itemDescription"))
+        Glide.with(this@DetailsItemActivity).load(FirebaseStorage.getInstance().reference.child("uploads/" + intent.getStringExtra("itemImage"))).into(itemimage)
+
+
 
         //shows top tool bar
         setSupportActionBar(topToolbar)
+
     }
+
 
     // 2 overrides to display menu & handle its actions
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

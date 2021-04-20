@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -13,6 +14,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_display_category.*
 import kotlinx.android.synthetic.main.activity_display_category.categoriesRecyclearView
 import kotlinx.android.synthetic.main.activity_display_item.*
@@ -122,6 +124,7 @@ class DisplayItemActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int, model: Item) {
             holder.itemView.itemNameTextView.text = model.itemName
             holder.itemView.itemLocationTextView.text = model.itemLocation
+            Glide.with(this@DisplayItemActivity).load(FirebaseStorage.getInstance().reference.child("uploads/" + model.itemImage)).into(holder.itemView.itemImageView)
 
             // Item selection when RecyclerView item touched
             holder.itemView.itemNameTextView.setOnClickListener {

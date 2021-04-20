@@ -12,43 +12,52 @@
         android:id="@+id/categoryNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
         android:gravity="top"
         android:paddingLeft="15dp"
         android:textFontWeight="500"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/categoryImageView"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/categoryImageView"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/icons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/categoryNameTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryNameTextView"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/updateItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/categoryImageView"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deleteItem"
+        app:layout_constraintStart_toEndOf="@+id/categoryImageView"
         app:layout_constraintTop_toBottomOf="@+id/categoryNameTextView"
         app:srcCompat="@drawable/ic_baseline_edit_24"
         app:tint="@color/white" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deleteItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/updateItem"
+        android:layout_marginTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/updateItem"
         app:layout_constraintTop_toBottomOf="@+id/categoryNameTextView"
         app:srcCompat="@drawable/ic_baseline_delete_24"
         app:tint="@color/white" />

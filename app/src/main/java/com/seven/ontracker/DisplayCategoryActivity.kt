@@ -1,15 +1,12 @@
 package com.seven.ontracker
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +14,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
-import io.grpc.InternalChannelz.id
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_display_category.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -122,6 +119,8 @@ class DisplayCategoryActivity : AppCompatActivity() {
         // Saving username and question into the recycler view from our QAForum model for each occurence
         override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, model: Category) {
             holder.itemView.categoryNameTextView.text = model.categoryName
+            Glide.with(this@DisplayCategoryActivity).load(FirebaseStorage.getInstance().reference.child("uploads/" + model.categoryImage)).into(holder.itemView.categoryImageView)
+            holder.itemView.categoryImageView
             holder.itemView.updateItem.setOnClickListener {
                 val intent = Intent(applicationContext, AddCategoryActivity::class.java)
                 intent.putExtra("categoryName", model.categoryName)
