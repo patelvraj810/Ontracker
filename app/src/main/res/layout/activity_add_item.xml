@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddItemActivity">
+
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -13,13 +14,14 @@
 
     <TextView
         android:id="@+id/itemNameTextView"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="Add Item"
         android:textAlignment="center"
-        android:textSize="25dp"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navtoolbar" />
@@ -28,7 +30,9 @@
         android:id="@+id/imageBtn"
         android:layout_width="match_parent"
         android:layout_height="204dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/itemNameEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,23 +46,28 @@
         android:id="@+id/itemNameEditText"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:ems="10"
-        android:hint="Item Name"
         android:gravity="center_horizontal"
+        android:hint="Item Name"
         android:inputType="text"
+
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/imageBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageBtn" />
 
     <EditText
         android:id="@+id/itemLocationEditText"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:ems="10"
         android:gravity="center_horizontal"
+
         android:hint="Item Location"
         android:inputType="text"
         android:textAlignment="center"
@@ -69,8 +78,12 @@
 
     <EditText
         android:id="@+id/itemDescriptionEditText"
-        android:layout_width="352dp"
-        android:layout_height="wrap_content"
+        android:layout_width="355dp"
+        android:layout_height="106dp"
+        android:lines="4"
+        android:maxLines="4"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Item Description"
@@ -81,22 +94,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemLocationEditText" />
 
-    <Spinner
-        android:id="@+id/chooseCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/itemDescriptionEditText"
-        tools:layout_editor_absoluteX="0dp" />
-
     <Button
         android:id="@+id/saveItemBtn"
         android:layout_width="120dp"
         android:layout_height="70dp"
+        android:layout_marginTop="25dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseCategory" />
-
+        app:layout_constraintTop_toBottomOf="@+id/itemDescriptionEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

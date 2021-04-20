@@ -77,17 +77,18 @@ class MainActivity : AppCompatActivity() {
 
             R.id.action_list -> {
                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
-
                 return true
             }
+
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
-
-
+                return true
             }
+
             R.id.action_home -> {
-                //already at home
+                return true
             }
+
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 finish()

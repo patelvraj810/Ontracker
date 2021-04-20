@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/addQuestionButton"
+        android:title="@string/add_question"
+        android:icon="@drawable/ic_baseline_add_box_24"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/questionListButton"
+        android:title="@string/list_questions"
+        android:icon="@drawable/ic_baseline_list_alt_24"
+        app:showAsAction="ifRoom" />
+</menu>

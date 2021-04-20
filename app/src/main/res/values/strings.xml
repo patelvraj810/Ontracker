@@ -67,4 +67,7 @@
     3.6 Our application may have the functionalities to allow you to share your personal data with other third parties such as other users of our application. You are responsible for your choice(s) and are deemed to have provided consent for any sharing of your personal data in the manner provided by the application.
     3.7 You fully understand and consent that we may transfer your personal data to any location outside of Canada for the purposes set out in this paragraph 3. When transferring your personal data outside of Canada we will protect your personal data to a standard comparable to the protection accorded to your personal data under the Canada Personal Data Protection Act 2012 by ensuring that the recipient is either in a jurisdiction which has comparable data protection laws, or is contractually bound to protect your personal data.
 </string>
+    <string name="add_question">Add Question</string>
+    <string name="list_questions">List of All Questions</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>

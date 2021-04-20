@@ -7,25 +7,36 @@
     tools:context=".TermsActivity">
 
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/termsTextView"
-    android:textSize="22dp"
-    android:scrollbars="vertical"
-    android:layout_marginTop="70dp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:text="@string/terms"/>
-
-    <TextView
         android:id="@+id/textView2"
-        android:layout_width="226dp"
-        android:layout_height="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="21dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:text="Terms &amp; Conditions"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="16dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/termsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:maxLines="25"
+            android:scrollbars="vertical"
+            android:text="@string/terms"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

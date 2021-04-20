@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".DisplayQuestionAnswerActivity">
 
+
+    <include
+        layout="@layout/toolbar_forum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/forumToolBar" />
+
     <TextView
         android:id="@+id/displayQuestionsTextView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/theme_color"
         android:text="@string/display_questions_header"
         android:textColor="@color/white"
         android:textSize="@dimen/heading"

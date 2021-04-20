@@ -1,17 +1,16 @@
 package com.seven.ontracker
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -19,14 +18,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import io.grpc.InternalChannelz.id
 import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_display_category.*
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.view_category.view.*
-import java.io.File
-import java.io.FileInputStream
 
 class DisplayCategoryActivity : AppCompatActivity() {
     // Firestore connection
@@ -68,10 +65,10 @@ class DisplayCategoryActivity : AppCompatActivity() {
                 return true
             }
 
-             R.id.action_list -> {
-                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
-                 return true
-             }
+            R.id.action_list -> {
+                startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
+                return true
+            }
             R.id.action_profile -> {
                 startActivity(Intent(applicationContext, ProfileActivity::class.java))
                 return true
@@ -117,7 +114,7 @@ class DisplayCategoryActivity : AppCompatActivity() {
     }
 
     private inner class CategoryAdapter internal constructor(options: FirestoreRecyclerOptions<Category>) :
-        FirestoreRecyclerAdapter<Category, CategoryViewHolder>(options) {
+            FirestoreRecyclerAdapter<Category, CategoryViewHolder>(options) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
             // call the item_question view and render the recycler view
             val view = LayoutInflater.from(parent.context).inflate(R.layout.view_category, parent, false)
@@ -127,38 +124,17 @@ class DisplayCategoryActivity : AppCompatActivity() {
         // Saving username and question into the recycler view from our QAForum model for each occurence
         override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, model: Category) {
             holder.itemView.categoryNameTextView.text = model.categoryName
-//            val encodeByte = Base64.decode(model.categoryImage, Base64.DEFAULT)
-//            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
-            // holder.itemView.categoryImageView.setImageURI(model.categoryImage)
-
-            val imageUri = Uri.parse(model.categoryImage)
-            var file: File = File(imageUri.path)
-            var bitmapImage = BitmapFactory.decodeStream(FileInputStream(file))
-
-            // display in Image View
-            holder.itemView.categoryImageView.setImageBitmap(bitmapImage)
-
-//            holder.itemView.updateItem.setOnClickListener {
-////                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
-////                intent.putExtra("categoryName", model.categoryName)
-////                startActivity(intent)
-////                database.collection("categories").document(model.id.toString()).delete()
-//                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
-//                intent.putExtra("ID", model.id)
-//                intent.putExtra("CATEGORY_NAME", model.categoryName)
-//                intent.putExtra("CATEGORY_IMAGE", model.categoryImage)
-//                intent.putExtra("isEditMode", true)//need to update exsiting data,set true
-//                startActivity(intent)
-//            }
+            Glide.with(this@DisplayCategoryActivity).load(FirebaseStorage.getInstance().reference.child("uploads/" + model.categoryImage)).into(holder.itemView.categoryImageView)
+            holder.itemView.categoryImageView
+            holder.itemView.updateItem.setOnClickListener {
+                val intent = Intent(applicationContext, AddCategoryActivity::class.java)
+                intent.putExtra("categoryName", model.categoryName)
+                startActivity(intent)
+                database.collection("categories").document(model.id.toString()).delete()
+            }
             holder.itemView.deleteItem.setOnClickListener {
                 database.collection("categories").document(model.id.toString()).delete()
             }
         }
     }
-
-//    private fun EditCategory(id:String, categoryName:String, categoryImage:String) {
-//        //Edit is clicked
-//        //Start AddUpdateRecordActivity to Update existing record
-//
-//    }
 }
