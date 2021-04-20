@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_question_answer.*
+import kotlinx.android.synthetic.main.toolbar_forum.*
 
 class QuestionAnswerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +43,26 @@ class QuestionAnswerActivity : AppCompatActivity() {
                 Toast.makeText(this,"Please enter the inputs", Toast.LENGTH_LONG).show()
             }
         }
+
+        setSupportActionBar(qaForumToolBar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.forum_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.addQuestionButton -> {
+                return true
+            }
+            R.id.questionListButton -> {
+                val intent = Intent(applicationContext, DisplayQuestionAnswerActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

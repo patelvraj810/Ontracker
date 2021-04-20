@@ -14,6 +14,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_display_question_answer.*
 import kotlinx.android.synthetic.main.item_question.view.*
+import kotlinx.android.synthetic.main.toolbar_forum.*
 
 class DisplayQuestionAnswerActivity : AppCompatActivity() {
     // Firestore connection
@@ -35,6 +36,27 @@ class DisplayQuestionAnswerActivity : AppCompatActivity() {
         adapter = QAForumAdapter(options)
         questionsRecyclerView.adapter = adapter
 
+        setSupportActionBar(qaForumToolBar)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.forum_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.addQuestionButton -> {
+                val intent = Intent(applicationContext, QuestionAnswerActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.questionListButton -> {
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // Start listening for changes from firebase

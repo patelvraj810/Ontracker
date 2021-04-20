@@ -1,18 +1,23 @@
 package com.seven.ontracker
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.google.android.gms.tasks.OnCompleteListener
@@ -35,7 +40,6 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-
 
         // populate the textviews based on the current user's profile
         if (authDb.currentUser != null) {
@@ -151,8 +155,6 @@ class ProfileActivity : AppCompatActivity() {
 
 
 
-
-
     // 2 overrides to display menu & handle its actions
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the main menu to add the items to the toolbar
@@ -169,16 +171,18 @@ class ProfileActivity : AppCompatActivity() {
 
             R.id.action_list -> {
                 startActivity(Intent(applicationContext, DisplayItemActivity::class.java))
-
                 return true
             }
-            R.id.action_profile -> {
-                //already in this activity
 
+            R.id.action_profile -> {
+                return true
             }
+
             R.id.action_home -> {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
+                return true
             }
+
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 finish()

@@ -11,92 +11,119 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/navtoolbar"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="319dp"
+        android:layout_height="169dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/border"
+        app:layout_constraintBottom_toTopOf="@+id/developersHeaderTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navtoolbar"
+        app:layout_constraintVertical_bias="0.283"
+        app:srcCompat="@drawable/logo" />
+
     <ImageView
         android:id="@+id/accountImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        android:layout_marginTop="256dp"
+
+        android:background="@drawable/border"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145"
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     <TextView
         android:id="@+id/developersHeaderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/border"
+
         android:text="Developers"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/accountImage"
         app:layout_constraintStart_toEndOf="@+id/accountImage"
-        app:layout_constraintTop_toTopOf="@+id/accountImage" />
+        app:layout_constraintTop_toTopOf="@+id/accountImage"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/seetaramDeveloper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#0A0A0A"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/border"
+
         android:text="Seetaram Patel (Product Owner)"
+        android:textColor="#0A0A0A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/accountImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/developersHeaderTextView" />
 
     <TextView
         android:id="@+id/vrajDeveloper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#0A0A0A"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/border"
+
         android:text="Vraj Patel (SCRUM Master)"
+        android:textColor="#0A0A0A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/accountImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seetaramDeveloper" />
 
     <TextView
         android:id="@+id/samarthDeveloper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#0A0A0A"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/border"
+
         android:text="Samarth Patel (Full Stack Developer)"
+        android:textColor="#0A0A0A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/accountImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vrajDeveloper" />
 
     <TextView
         android:id="@+id/arpitDeveloper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textColor="#0A0A0A"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/border"
+
         android:text="Arpit Patel (QA Tester)"
+        android:textColor="#0A0A0A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/accountImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/samarthDeveloper" />
 
     <ImageView
         android:id="@+id/emailImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
+
+        android:background="@drawable/border"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/arpitDeveloper"
-        app:layout_constraintVertical_bias="0.006"
         app:srcCompat="@drawable/ic_baseline_mail_24" />
 
     <TextView
@@ -104,7 +131,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:background="@drawable/border"
+
         android:text="Email"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/emailImage"
         app:layout_constraintStart_toEndOf="@+id/emailImage"
         app:layout_constraintTop_toTopOf="@+id/emailImage" />
@@ -113,24 +144,26 @@
         android:id="@+id/emailTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="#0A0A0A"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+
+        android:background="@drawable/border"
         android:text="Ontrakeravengers@gmail.com"
+        android:textColor="#0A0A0A"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/emailImage"
-        app:layout_constraintTop_toBottomOf="@+id/emailHeaderTextView"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailHeaderTextView" />
 
     <ImageView
         android:id="@+id/aboutUsImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/border"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.145"
+
         app:layout_constraintTop_toBottomOf="@+id/emailTextView"
         app:srcCompat="@drawable/ic_baseline_groups_24" />
 
@@ -139,7 +172,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:background="@drawable/border"
         android:text="About Us"
+        android:textSize="18sp"
+
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/aboutUsImage"
         app:layout_constraintStart_toEndOf="@+id/aboutUsImage"
         app:layout_constraintTop_toTopOf="@+id/aboutUsImage" />
@@ -148,15 +185,19 @@
         android:id="@+id/aboutUsTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
-        android:textColor="#0A0A0A"
+
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/border"
         android:inputType="textMultiLine"
         android:justificationMode="inter_word"
         android:text="We are the highly motivated professionals of OnTracker. We believe in great service with best user experience. You can reach to us via email or phone."
+        android:textColor="#0A0A0A"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/aboutUsImage"
-        app:layout_constraintTop_toBottomOf="@+id/aboutUsHeaderTextView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutUsHeaderTextView"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
